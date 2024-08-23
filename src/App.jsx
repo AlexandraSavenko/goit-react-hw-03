@@ -3,6 +3,7 @@ import ContactList from "./components/ContactList/ContactList";
 import "./App.css";
 import SearchBox from "./components/SearchBox/SearchBox";
 import ContactForm from "./components/ContactForm/ContactForm";
+import { nanoid } from "nanoid";
 
 function App() {
   const [contacts, setContact] = useState([
@@ -12,12 +13,13 @@ function App() {
     { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
   ]);
   const addNumber = (newNumber) => {
-    console.log(newNumber);
     setContact((allNumbers) => {
-      return [
-        ...allNumbers,
-        { id: "", name: newNumber.name, number: newNumber.number },
-      ];
+      const newContact = {
+        id: nanoid(),
+        name: newNumber.name,
+        number: newNumber.number,
+      };
+      return [...allNumbers, newContact];
     });
   };
   const [filter, setFilter] = useState("");
