@@ -1,8 +1,7 @@
 import { useState } from "react";
 import ContactList from "./components/ContactList/ContactList";
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
 import "./App.css";
+import SearchBox from "./components/SearchBox/SearchBox";
 
 function App() {
   const [contacts, setContact] = useState([
@@ -11,10 +10,16 @@ function App() {
     { id: "id-3", name: "Eden Clements", number: "645-17-79" },
     { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
   ]);
+  const [filter, setFilter] = useState("");
+  const visibleNumbers = contacts.filter((contact) => {
+    return contact.name.toLowerCase().includes(filter.toLowerCase());
+  });
+
   return (
     <div>
       <h1>Phonebook</h1>
-      <ContactList contArr={contacts} />
+      <SearchBox value={filter} onFilter={setFilter} />
+      <ContactList contArr={visibleNumbers} />
     </div>
   );
 }
