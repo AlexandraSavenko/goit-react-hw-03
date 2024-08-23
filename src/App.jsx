@@ -22,6 +22,11 @@ function App() {
       return [...allNumbers, newContact];
     });
   };
+  const deleteNumber = (numberId) => {
+    setContact((allContacts) => {
+      return allContacts.filter((contact) => contact.id !== numberId);
+    });
+  };
   const [filter, setFilter] = useState("");
   const visibleNumbers = contacts.filter((contact) => {
     return contact.name.toLowerCase().includes(filter.toLowerCase());
@@ -32,7 +37,7 @@ function App() {
       <h1>Phonebook</h1>
       <ContactForm onAdd={addNumber} />
       <SearchBox value={filter} onFilter={setFilter} />
-      <ContactList contArr={visibleNumbers} />
+      <ContactList contArr={visibleNumbers} onDelete={deleteNumber} />
     </div>
   );
 }
